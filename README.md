@@ -12,37 +12,49 @@ exceptional command line arguments.
 
 ```mermaid
 flowchart TD
-    A["Boot Start:<br/>20 terminal slots available"] --> W1
+    A["Boot Start<br>10 terminal slots available"] --> W1
     
-    subgraph W1["Wave 1:<br/>Fill all 20 slots"]
+    subgraph W1["Wave 1: Initial Services"]
         direction LR
-        T1["Terminal 1<br/>mount"]
-        T2["Terminal 2<br/>mknod"]
-        T3["Terminal 3<br/>swapon"]
-        T4["Terminal 4<br/>dhclient"]
-        T20["Terminal 20<br/>..."]
+        T1["T1: mount"]
+        T2["T2: mknod"]
+        T3["T3: swapon"]
+        T4["T4: dhclient"]
+        T5["T5: kmod"]
+        T6["T6: network"]
+        T7["T7: syslog"]
+        T8["T8: random"]
+        T9["T9: urandom"]
+        T10["T10: ..."]
     end
     
-    W1 --> B{"Wait for ANY terminal<br/>to finish"}
+    W1 --> B{"Wait for ANY<br>terminal to finish"}
     
-    B --> C["Slot freed!<br/>Start next service"]
+    B --> C["Slot freed!<br>Start next service"]
     
-    C --> D{"More --unp services?"}
+    C --> D{"More<br>--unp services?"}
     
-    D -- "No" --> W2["Wave 2:<br/>Normal parallel services"]
-    D -- "Yes" --> E["Queue for --unp lock"]
+    D -- "No" --> W2
+    D -- "Yes" --> E["Queue for<br>--unp lock"]
     
-    E --> F["--unp service runs<br/>(takes 1 slot exclusively)"]
+    E --> F["--unp service runs<br>(exclusive slot)"]
     
     F --> W2
     
-    subgraph W2["Wave 2:<br/>Continue filling 20 slots"]
+    subgraph W2["Wave 2: Parallel Services"]
         direction LR
-        U1["Terminal 1<br/>udev"]
-        U2["Terminal 2<br/>fsck"]
-        U3["Terminal 3<br/>dbus"]
-        U4["Terminal 4<br/>..."]
-        U20["Terminal 20<br/>getty"]
+        U1["T1: udev"]
+        U2["T2: fsck"]
+        U3["T3: dbus"]
+        U4["T4: cron"]
+        U5["T5: sshd"]
+        U6["T6: ntp"]
+        U7["T7: docker"]
+        U8["T8: nginx"]
+        U9["T9: mysql"]
+        U10["T10: getty"]
     end
+    
+    W2 --> G["Boot Complete"]
 ```
 Making the boot very faster..
