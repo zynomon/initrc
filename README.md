@@ -1,5 +1,6 @@
 initRC 
-is more leaner than other init system well it's just a concept for now. i dont have enough time these days to manage and make it real.
+is more leaner than other init system well it's just a concept for now.
+
 
 the core idea is to use those extra 50% of unused cpu pressure at work and make the device more faster 
 initRC will run different command in different virtual terminals if one command finishes it will run another making the bootup speed faster unlike the traditional 1 command at a time method 
@@ -59,3 +60,4 @@ flowchart TD
 ```
 Making the boot very faster..
 instead of running one service at a time
+another of the idea is to have a unified init system and changing init system in linux should be easy as if changing login manager , like making some api instead of specified init would be the best choice
