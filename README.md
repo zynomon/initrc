@@ -10,40 +10,39 @@ exceptional command line arguments.
 --switch above/below to control the position to run it.
 ( and other ordinary init command line arguments )
 
-
-``` mermaid
+```mermaid
 flowchart TD
-    A[“Boot Start: 20 terminal slots available”] --> W1
+    A["Boot Start:<br/>20 terminal slots available"] --> W1
     
-    subgraph W1[“Wave 1: Fill all 10 slots”]
+    subgraph W1["Wave 1:<br/>Fill all 20 slots"]
         direction LR
-        T1[Terminal 1<br>plymouth]
-        T2[Terminal 2<br>mknod]
-        T3[Terminal 3<br>swapon]
-        T4[Terminal 4<br>dhclient]
-        T10[Terminal 10<br>...]
+        T1["Terminal 1<br/>mount"]
+        T2["Terminal 2<br/>mknod"]
+        T3["Terminal 3<br/>swapon"]
+        T4["Terminal 4<br/>dhclient"]
+        T20["Terminal 20<br/>..."]
     end
     
-    W1 --> B{“Wait for ANY terminal to finish”}
+    W1 --> B{"Wait for ANY terminal<br/>to finish"}
     
-    B --> C[“Slot freed!<br>Start next service”]
+    B --> C["Slot freed!<br/>Start next service"]
     
-    C --> D{“More --unp services?”}
+    C --> D{"More --unp services?"}
     
-    D -- “No” --> W2[“Wave 2: Normal parallel services”]
-    D -- “Yes” --> E[“Queue for --unp lock”]
+    D -- "No" --> W2["Wave 2:<br/>Normal parallel services"]
+    D -- "Yes" --> E["Queue for --unp lock"]
     
-    E --> F[“--unp service runs<br>(takes 1 slot exclusively)”]
+    E --> F["--unp service runs<br/>(takes 1 slot exclusively)"]
     
     F --> W2
     
-    subgraph W2[“Wave 2: Continue filling and executing the blank space of finished tasks”]
+    subgraph W2["Wave 2:<br/>Continue filling 20 slots"]
         direction LR
-        U1[Terminal 1<br>udev]
-        U2[Terminal 2<br>fsck]
-        U3[Terminal 3<br>dbus]
-        U4[Terminal 4<br>...]
-        U20[Terminal 20<br>getty]
+        U1["Terminal 1<br/>udev"]
+        U2["Terminal 2<br/>fsck"]
+        U3["Terminal 3<br/>dbus"]
+        U4["Terminal 4<br/>..."]
+        U20["Terminal 20<br/>getty"]
     end
 ```
 Making the boot very faster..
