@@ -58,3 +58,4 @@ flowchart TD
     W2 --> G["Boot Complete"]
 ```
 Making the boot very faster..
+instead of running one service at a time
