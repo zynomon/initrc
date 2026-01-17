@@ -58,6 +58,9 @@ flowchart TD
     
     W2 --> G["Boot Complete"]
 ```
+
 Making the boot very faster..
 instead of running one service at a time
 another of the idea is to have a unified init system and changing init system in linux should be easy as if changing login manager , like making some api instead of specified init would be the best choice
+
+the core tech behind it gonna be c++ 
